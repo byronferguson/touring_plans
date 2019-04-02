@@ -1,6 +1,10 @@
-var API_KEY = '5d776dcd6a105f3be5b190dda376f80a';
-var BASE_URL = 'https://api-v3.igdb.com';
-var SEARCH_ENDPOINT = '/search';
+var BASE_URL = 'https://touringplans.com/magic-kingdom';
+var ATTRACTIONS_URL = `${BASE_URL}/attractions.json`;
+var ATTRACTIONS_BASE_URL = `${BASE_URL}/attractions`;
+
+var attractionUrl = function (name) {
+  return `${ATTRACTIONS_BASE_URL}/${name}.json`;
+};
 
 // eslint-disable-next-line
 jQuery.ajaxPrefilter(function (options) {
@@ -14,15 +18,16 @@ jQuery.ajaxPrefilter(function (options) {
 console.log('testing');
 
 $.ajax({
-  method: 'POST',
-  url: BASE_URL + SEARCH_ENDPOINT,
-  headers: {
-    Accept: 'application/json',
-    'user-key': API_KEY,
-  },
-  data: {
-    name: 'Final Fantasy',
-  },
+  method: 'GET',
+  url: ATTRACTIONS_URL,
 }).then(function (res) {
-  console.log('res :', res);
+  $('#attractions').empty().append(createAttractionList(res));
 });
+
+function createAttractionList(attractions) {
+  return attractions.map(createAttractionListItem);
+}
+
+function createAttractionListItem(attraction) {
+  return $('<li>').text(attraction.name).addClass('list-group-item');
+}
