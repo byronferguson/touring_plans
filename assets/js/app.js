@@ -1,6 +1,10 @@
 var BASE_URL = 'https://touringplans.com/magic-kingdom';
-var ATTRACTIONS_URL = `${BASE_URL}/attractions.json`;
+
 var ATTRACTIONS_BASE_URL = `${BASE_URL}/attractions`;
+var DINING_BASE_URL = `${BASE_URL}/dining`;
+
+var ATTRACTIONS_URL = `${ATTRACTIONS_BASE_URL}.json`;
+var DINING_URL = `${DINING_BASE_URL}.json`;
 
 var attractionUrl = function (name) {
   return `${ATTRACTIONS_BASE_URL}/${name}.json`;
@@ -21,6 +25,7 @@ $.ajax({
   method: 'GET',
   url: ATTRACTIONS_URL,
 }).then(function (res) {
+  console.log(res);
   $('#attractions').empty().append(createAttractionList(res));
 });
 
