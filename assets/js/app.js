@@ -36,3 +36,14 @@ function createAttractionList(attractions) {
 function createAttractionListItem(attraction) {
   return $('<li>').text(attraction.name).addClass('list-group-item');
 }
+
+
+$.ajax({
+  url: 'https://trefle.io/api/plants?q=rose&token=aCttaGhBMjlVRjQ4K3dZeDFWRzNvUT09',
+  method: 'GET',
+  // headers: {
+  //   Authorization: 'Bearer aCttaGhBMjlVRjQ4K3dZeDFWRzNvUT09',
+  // },
+}).then(function (res) {
+  console.log(res);
+});
